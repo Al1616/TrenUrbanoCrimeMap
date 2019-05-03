@@ -1,65 +1,91 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8' />
-    <title>Swipe between maps</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
-</head>
-<body>
-    
+console.log("Hello, world!")
+// your mapbox token
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWwxNjE2IiwiYSI6ImNqc200ZXQ0YTBnOWE0NG54Ym45YnYybHgifQ.t9lM7oOjsxtKmQS_BGfbdg'
 
-<style>
-body {
-    overflow: hidden;
-}
+let map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/al1616/cjv8d129i3wjd1ftazkl7tmr7',
+    center: [-66.08392,18.41259], 
+    zoom: 12
+})
 
-body * {
-   -webkit-touch-callout: none;
-     -webkit-user-select: none;
-        -moz-user-select: none;
-         -ms-user-select: none;
-             user-select: none;
-}
+// create an instance of NavigationControl
+let navigation = new mapboxgl.NavigationControl({
+    showCompass: false
+})
 
-.map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-}
-</style>
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.1.0/mapbox-gl-compare.css' type='text/css' />
+// add the navigation to your map
+map.addControl(navigation, 'top-left')
 
-<div id='before' class='map'></div>
-<div id='after' class='map'></div>
-<script>
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWwxNjE2IiwiYSI6ImNqc200ZXQ0YTBnOWE0NG54Ym45YnYybHgifQ.t9lM7oOjsxtKmQS_BGfbdg';
-var beforeMap = new mapboxgl.Map({
-    container: 'before',
-    style: 'mapbox://styles/mapbox/light-v10',
-    center: [0, 0],
-    zoom: 0
-});
+// create an instance of ScaleControl
+let scale = new mapboxgl.ScaleControl({
+    maxWidth: 80,
+    unit: 'imperial'
+})
 
-var afterMap = new mapboxgl.Map({
-    container: 'after',
-    style: 'mapbox://styles/mapbox/dark-v10',
-    center: [0, 0],
-    zoom: 0
-});
+// add the scale to your map
+map.addControl(scale, 'bottom-right')
 
-var map = new mapboxgl.Compare(beforeMap, afterMap, {
-    // Set this to enable comparing two maps by mouse movement:
-    // mousemove: true
-});
-</script>
+let geolocate = new mapboxgl.GeolocateControl({
+    positionOptions: {
+        enableHighAccuracy: true
+    },
+    trackUserLocation: true,
+    showUserLocation: true,
+    fitBoundsOptions: {
+    }
+})
 
-</body>
-</html>
+map.addControl(geolocate, 'top-left')
+
+geolocate.on('geolocate', function(event) {
+
+    // create new variables to store the attributes we're interested in from the event
+    let lng = event.coords.longitude
+    let lat = event.coords.latitude
+
+    // debug
+    console.log('geolocated:', lng, lat)
+
+    // format lng lat values and display them on our 'info' element
+    document.getElementById('info').innerHTML = lng.toFixed(5) + "," + lat.toFixed(5)
+
+})
+
+map.on('click', function(event) {
+
+    let lng = event.lngLat.lng
+    let lat = event.lngLat.lat
+
+    console.log("clicked:", lng, lat)
+
+    document.getElementById('info').innerHTML = lng.toFixed(5) + "," + lat.toFixed(5)
+
+})
+
+let data = [
+    {
+        location: [-73.96191,40.80762],
+        content: 'I like to eat my lunch here<br /><img src="https://currystonefoundation.org/wp-content/uploads/2018/05/csf_pr_csr_image5.jpg" />'
+    },
+    {
+        location: [-73.95936,40.80610],
+        content: '15 years ago, you could see over the trees'
+    },
+    {
+        location: [-73.96204,40.80994],
+        content: 'This was once tennis courts'
+    },
+    ]
+
+    data.forEach(function(d) {
+
+    let marker = new mapboxgl.Marker()    
+    marker.setLngLat(d.location)
+    marker.addTo(map)  
+
+    let popup = new mapboxgl.Popup()
+    popup.setHTML(d.content)
+    marker.setPopup(popup)
+
+})
