@@ -65,16 +65,68 @@ map.on('click', function(event) {
 
 let data = [
     {
-        location: [-73.96191,40.80762],
-        content: 'I like to eat my lunch here<br /><img src="https://currystonefoundation.org/wp-content/uploads/2018/05/csf_pr_csr_image5.jpg" />'
+        location: [-66.15379,18.40043],
+        content: 'Bayamón'
     },
     {
-        location: [-73.95936,40.80610],
-        content: '15 years ago, you could see over the trees'
+        location: [-66.14928,18.39428],
+        content: 'Deportivo'
     },
     {
-        location: [-73.96204,40.80994],
-        content: 'This was once tennis courts'
+        location: [-66.12835,18.39410],
+        content: 'Jardines'
+    },
+    {
+        location: [-66.11944,18.39193],
+        content: 'Torrimar'
+    },
+    {
+        location: [-66.10158,18.39113],
+        content: 'Martínez Nadal'
+    },
+    {
+        location: [-66.09400,18.39079],
+        content: 'Las Lomas'
+    },
+    {
+        location: [-66.08293,18.39077],
+        content: 'San Francisco'
+    },
+    {
+        location: [-66.07498,18.39148],
+        content: 'Centro Médico'
+    },
+    {
+        location: [-66.06325,18.39036],
+        content: 'Cupey'
+    },
+    {
+        location: [-66.05217,18.39960],
+        content: 'Río Piedras'
+    },
+    {
+        location: [-66.05172,18.40584],
+        content: 'Universidad'
+    },
+    {
+        location: [-66.05537,18.41096],
+        content: 'Piñero'
+    },
+    {
+        location: [-66.05639,18.41513],
+        content: 'Domenech'
+    },
+    {
+        location: [-66.05887,18.42338],
+        content: 'Roosevelt'
+    },
+    {
+        location: [-66.06019,18.42932,
+        content: 'Hato Rey'
+    },
+    {
+        location: [-66.06044,18.43638],
+        content: 'Sagrado Corazón'
     },
     ]
 
