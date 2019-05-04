@@ -5,8 +5,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWwxNjE2IiwiYSI6ImNqc200ZXQ0YTBnOWE0NG54Ym45Y
 let map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/al1616/cjv8d129i3wjd1ftazkl7tmr7',
-    center: [-66.08392,18.41259], 
-    zoom: 12
+    center: [-66.09922,18.41292], 
+    zoom: 13
 })
 
 // create an instance of NavigationControl
@@ -121,7 +121,7 @@ let data = [
         content: 'Roosevelt'
     },
     {
-        location: [-66.06019,18.42932,
+        location: [-66.06019,18.42932],
         content: 'Hato Rey'
     },
     {
@@ -129,7 +129,6 @@ let data = [
         content: 'Sagrado Corazón'
     },
     ]
-
     data.forEach(function(d) {
 
     let marker = new mapboxgl.Marker()    
@@ -141,3 +140,4 @@ let data = [
     marker.setPopup(popup)
 
 })
+
